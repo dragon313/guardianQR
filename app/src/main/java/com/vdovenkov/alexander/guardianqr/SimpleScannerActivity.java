@@ -3,7 +3,6 @@ package com.vdovenkov.alexander.guardianqr;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.zxing.Result;
 
@@ -38,14 +37,8 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
 
     @Override
     public void handleResult(Result rawResult) {
-        Toast.makeText(this, "Contents = " + rawResult.getText() +
-                ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
         ScanDetailActivity.showScanResult(this, rawResult.getText());
 
-        // Note:
-        // * Wait 2 seconds to resume the preview.
-        // * On older devices continuously stopping and resuming camera preview can result in freezing the app.
-        // * I don't know why this is the case but I don't have the time to figure out.
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override

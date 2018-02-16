@@ -43,7 +43,6 @@ public class ScanDetailActivity extends AppCompatActivity {
 
     private void fetchInfo() {
         String magicItems = "";
-        //language=RoomSql
         String querry = "SELECT * FROM magic_items WHERE _id = ?";
         Cursor cursor = database.rawQuery(querry, new String[]{itemm_id});
         cursor.moveToFirst();
@@ -73,38 +72,5 @@ public class ScanDetailActivity extends AppCompatActivity {
         Intent intent = new Intent(context, ScanDetailActivity.class);
         intent.putExtra(ITEM_ID, id);
         context.startActivity(intent);
-    }
-
-    private void fillList() {
-        //Список предметов
-        List<Map<String, Object>> magicItems = new ArrayList<>();
-
-        //Список параметров конкретного предмета
-        Map<String, Object> items;
-        //Условия можно менять, ура!
-        Cursor cursor = database.rawQuery("SELECT * FROM magic_items WHERE group_id = ?", new String[]{"2"});
-
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()) {
-            items = new HashMap<>();
-
-            items.put("title", cursor.getString(1));
-            items.put("description", cursor.getString(2));
-
-            magicItems.add(items);
-
-            cursor.moveToNext();
-        }
-        cursor.close();
-
-        String[] from = {"title", "description"};
-        int[] to = {R.id.title_text_view, R.id.description_text_view};
-
-        SimpleAdapter adapter = new SimpleAdapter(this, magicItems, R.layout.list_item,
-                from, to);
-        ListView listView = findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
-
     }
 }

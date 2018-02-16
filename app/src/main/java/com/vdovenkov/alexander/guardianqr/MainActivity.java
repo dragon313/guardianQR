@@ -29,17 +29,17 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClss;
-    
 
-    
+
+
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         setupToolbar();
-        
-        
+
+
     }
 
     public void setupToolbar() {
@@ -51,30 +51,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "Запуск сканера магических отпечатков", Toast.LENGTH_SHORT).show();
         launchActivity(SimpleScannerActivity.class);
     }
-//
-//    public void launchSimpleFragmentActivity(View v) {
-//        launchActivity(SimpleScannerFragmentActivity.class);
-//    }
-//
-//    public void launchFullActivity(View v) {
-//        launchActivity(FullScannerActivity.class);
-//    }
-//
-//    public void launchFullFragmentActivity(View v) {
-//        launchActivity(FullScannerFragmentActivity.class);
-//    }
-//
-//    public void launchFullScreenScannerFragmentActivity(View v) {
-//        launchActivity(FullScreenScannerFragmentActivity.class);
-//    }
-//
-//    public void launchCustomViewFinderScannerActivity(View v) {
-//        launchActivity(CustomViewFinderScannerActivity.class);
-//    }
-//
-//    public void launchScalingScannerActivity(View v) {
-//        launchActivity(ScalingScannerActivity.class);
-//    }
 
     public void launchActivity(Class<?> clss) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
