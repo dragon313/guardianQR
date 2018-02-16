@@ -21,7 +21,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:orientation="vertical">
 
             <Button
@@ -29,44 +28,11 @@
                 android:layout_height="wrap_content"
                 android:onClick="launchSimpleActivity"
                 android:text="@string/investigate" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <Button
-                android:id="@+id/read_db_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Прочитать Базу данных" />
-
-            <ListView
-                android:id="@+id/list_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ListView>
-            <!--<Button android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:text="@string/activity_sample"-->
-            <!--android:onClick="launchFullActivity" />-->
-            <!--<Button android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:text="@string/fragment_sample"-->
-            <!--android:onClick="launchFullFragmentActivity" />-->
-            <!--<Button android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:text="@string/full_screen_sample"-->
-            <!--android:onClick="launchFullScreenScannerFragmentActivity" />-->
-            <!--<Button android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:text="@string/custom_view_finder_sample"-->
-            <!--android:onClick="launchCustomViewFinderScannerActivity" />-->
-            <!--<Button android:layout_height="wrap_content"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:text="@string/scaling_sample"-->
-            <!--android:onClick="launchScalingScannerActivity" />-->
+                android:id="@+id/list_view_button"
+                android:text="@string/show_notepad"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 </LinearLayout>
