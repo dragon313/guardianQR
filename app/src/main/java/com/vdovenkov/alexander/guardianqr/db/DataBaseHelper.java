@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 
+import com.vdovenkov.alexander.guardianqr.R;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,7 +21,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "guardDB.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 3;
 
     private SQLiteDatabase database;
     private final Context context;
@@ -68,7 +70,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     private void copyDBFile() throws IOException {
-        InputStream inputStream = context.getAssets().open(DB_NAME);
+//        InputStream inputStream = context.getAssets().open(DB_NAME);
+        InputStream inputStream = context.getResources().openRawResource(R.raw.guard_db);
         OutputStream outputStream = new FileOutputStream(DB_PATH + DB_NAME);
         byte[] buffer = new byte[1024];
         int length;
