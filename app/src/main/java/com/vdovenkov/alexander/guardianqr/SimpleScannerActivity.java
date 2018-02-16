@@ -40,6 +40,7 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
     public void handleResult(Result rawResult) {
         Toast.makeText(this, "Contents = " + rawResult.getText() +
                 ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
+        ScanDetailActivity.showScanResult(this, rawResult.getText());
 
         // Note:
         // * Wait 2 seconds to resume the preview.

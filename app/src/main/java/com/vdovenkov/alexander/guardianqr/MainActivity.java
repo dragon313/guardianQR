@@ -29,79 +29,17 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClss;
-    Button readDbButton;
-    TextView textView;
+    
 
-    //Переменные для работы с БД
-    private DataBaseHelper dataBaseHelper;
-    private SQLiteDatabase database;
+    
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         setupToolbar();
-        dataBaseHelper = new DataBaseHelper(this);
-
-        try {
-            dataBaseHelper.updateDataBase();
-        } catch (IOException e) {
-            throw new Error("UnableToUpdateDatabase");
-        }
-
-        database = dataBaseHelper.getWritableDatabase();
-
-        textView = findViewById(R.id.textView);
-        readDbButton = findViewById(R.id.read_db_button);
-        readDbButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String magicItems = "";
-                String querry = "SELECT * FROM magic_items";
-                Cursor cursor = database.rawQuery(querry, null);
-                cursor.moveToFirst();
-                while (!cursor.isAfterLast()) {
-                    magicItems += cursor.getString(1) + " | ";
-                    cursor.moveToNext();
-                }
-                cursor.close();
-                textView.setText(magicItems);
-            }
-        });
-
-        fillList();
-    }
-
-    private void fillList() {
-        //Список предметов
-        List<Map<String, Object>> magicItems = new ArrayList<>();
-
-        //Список параметров конкретного предмета
-        Map<String, Object> items;
-
-        Cursor cursor = database.rawQuery("SELECT * FROM magic_items", null);
-        cursor.moveToFirst();
-
-        while (!cursor.isAfterLast()) {
-            items = new HashMap<>();
-
-            items.put("title", cursor.getString(1));
-            items.put("description", cursor.getString(2));
-
-            magicItems.add(items);
-
-            cursor.moveToNext();
-        }
-        cursor.close();
-
-        String[] from = {"title", "description"};
-        int[] to = {R.id.title_text_view, R.id.description_text_view};
-
-        SimpleAdapter adapter = new SimpleAdapter(this, magicItems, R.layout.list_item,
-                from, to);
-        ListView listView = findViewById(R.id.list_view);
-        listView.setAdapter(adapter);
-
+        
+        
     }
 
     public void setupToolbar() {
