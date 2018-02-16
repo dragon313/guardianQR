@@ -18,7 +18,7 @@ public class SimpleScannerActivity extends BaseScannerActivity implements ZXingS
         setContentView(R.layout.activity_simple_scanner);
         setupToolbar();
 
-        ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
+        ViewGroup contentFrame = findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
         contentFrame.addView(mScannerView);
     }

@@ -9,21 +9,30 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClss;
+    Button readDbButton;
 
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         setupToolbar();
+        readDbButton = findViewById(R.id.read_db_button);
+        readDbButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public void setupToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
@@ -78,9 +87,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                 } else {
-                    Toast.makeText(this, "Please grant camera permission to use the QR Scanner", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Искренне просим выдать доступ к магическому оку. Без него никак, хозяин...", Toast.LENGTH_SHORT).show();
                 }
-                return;
         }
     }
 }

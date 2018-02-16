@@ -7,7 +7,7 @@ import android.view.MenuItem;
 
 public class BaseScannerActivity extends AppCompatActivity {
     public void setupToolbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         final ActionBar ab = getSupportActionBar();
         if(ab != null) {

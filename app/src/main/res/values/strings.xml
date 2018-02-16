@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Сканнер магических отпечатков</string>
+    <string name="app_name">Сканер магических отпечатков</string>
     <string name="investigate">Узнать что-то новое</string>
     <string name="scanner_activity">ZXing Scanner - Full Activity</string>
     <string name="scanner_fragment_activity">ZXing Scanner - Full Fragment Activity</string>
