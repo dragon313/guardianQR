@@ -25,7 +25,8 @@
             android:name=".SimpleScannerActivity"
             android:theme="@style/AppOverlayTheme" />
         <activity android:name=".ScanDetailActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".ListOfStudiedActivity"></activity>
     </application>
 
 </manifest>

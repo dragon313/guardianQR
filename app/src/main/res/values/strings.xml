@@ -2,6 +2,14 @@
     <string name="app_name">Сканер магических отпечатков</string>
     <string name="investigate">Узнать что-то новое</string>
     <string name="show_notepad">Посмотреть записи в блокноте</string>
+    <string name="magic_word">Волшебное слово</string>
+    <string name="action_settings">Настройки</string>
+    <string name="chose_fraction">Выберите вашу фракцию</string>
+    <string name="guard_access_text">Знания стража: %1$s</string>
+    <string name="chearch_access_text">Знания монаха: %1$s</string>
+    <string name="orden_access_text">Знания орденца: %1$s</string>
+    <string name="cast">Кастануть</string>
+
     <string name="scanner_activity">ZXing Scanner - Full Activity</string>
     <string name="scanner_fragment_activity">ZXing Scanner - Full Fragment Activity</string>
     <string name="simple_scanner_activity">ZXing Scanner - Simple Activity</string>
@@ -25,12 +33,11 @@
     <string name="select_camera">Select a Camera</string>
     <string name="ok_button">OK</string>
     <string name="cancel_button">Cancel</string>
-    <string name="action_settings">Настройки</string>
     <bool name="cameraPreviewShouldFillView">true</bool>
 
     <string-array name="fraction">
-        <item>Стражи</item>
-        <item>Церковь</item>
-        <item>Орден</item>
+        <item>Страж</item>
+        <item>Монах</item>
+        <item>Орденец</item>
     </string-array>
 </resources>
