@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +43,6 @@ public class ScanDetailActivity extends AppCompatActivity {
     }
 
     private void fetchInfo() {
-
         if (checkRules()) {
             String querry = "SELECT * FROM magic_items WHERE _id = ?";
             String isReadQuery = "UPDATE magic_items SET is_read = 1 WHERE _id = ?";
@@ -56,7 +56,13 @@ public class ScanDetailActivity extends AppCompatActivity {
     }
 
     private boolean checkRules() {
-        String querry = "select * from access_rules where access_rules._id = (select magic_items.group_id from magic_items where magic_items._id=?)";
+        String groupQuerry = "SELECT magic_items.group_id FROM magic_items WHERE magic_items._id=?";
+        Cursor groupCursor = database.rawQuery(groupQuerry, null);
+        groupCursor.moveToFirst();
+        String groupId = groupCursor.getString(0);
+        Log.d(TAG, "Данный предмет относится к группе: " + groupId);
+
+        String querry = "SELECT * FROM access_rules WHERE access_rules._id = (SELECT magic_items.group_id FROM magic_items WHERE magic_items._id=?)";
         Cursor cursor = database.rawQuery(querry, new String[]{itemId});
         cursor.moveToFirst();
         boolean result = cursor.getString(0).equals("1");
@@ -79,7 +85,7 @@ public class ScanDetailActivity extends AppCompatActivity {
         try {
             dataBaseHelper.updateDataBase();
         } catch (IOException e) {
-            throw new Error("UnableToUpdateDatabase");
+            throw new Error("Unable To Update Database");
         }
 
         database = dataBaseHelper.getWritableDatabase();

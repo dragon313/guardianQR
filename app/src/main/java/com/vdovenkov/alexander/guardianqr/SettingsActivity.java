@@ -54,6 +54,7 @@ public class SettingsActivity extends AppCompatActivity {
                             changeAccessRule(fractionSpinner.getSelectedItem().toString());
                             Toast.makeText(SettingsActivity.this, "Введён верный пароль для стражей", Toast.LENGTH_SHORT).show();
                         } else {
+                            initGUI();
                             Toast.makeText(SettingsActivity.this, "Введён неверный пароль", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -62,6 +63,7 @@ public class SettingsActivity extends AppCompatActivity {
                             changeAccessRule(fractionSpinner.getSelectedItem().toString());
                             Toast.makeText(SettingsActivity.this, "Введён верный пароль для монахов", Toast.LENGTH_SHORT).show();
                         } else {
+                            initGUI();
                             Toast.makeText(SettingsActivity.this, "Введён неверный пароль", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -70,6 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
                             changeAccessRule(fractionSpinner.getSelectedItem().toString());
                             Toast.makeText(SettingsActivity.this, "Введён верный пароль для орденцев", Toast.LENGTH_SHORT).show();
                         } else {
+                            initGUI();
                             Toast.makeText(SettingsActivity.this, "Введён неверный пароль", Toast.LENGTH_SHORT).show();
                         }
                         break;
@@ -92,7 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void resetAccessRules() {
-        String query = "update access_rules set is_granted = 0";
+        String query = "UPDATE access_rules SET is_granted = '0'";
         database.execSQL(query);
         initGUI();
     }
@@ -106,22 +109,16 @@ public class SettingsActivity extends AppCompatActivity {
         Cursor cursor = database.rawQuery(querry, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            switch (cursor.getString(1)) {
-                case "Страж":
-                    guardAccessTextView.setText(cursor.getString(2).equals("0") ?
-                            String.format(getResources().getString(R.string.guard_access_text), "недоступны") :
-                            String.format(getResources().getString(R.string.guard_access_text), "доступны"));
-                    break;
-                case "Монах":
-                    chearchAccessTextView.setText(cursor.getString(2).equals("0") ?
-                            String.format(getResources().getString(R.string.chearch_access_text), "недоступны") :
-                            String.format(getResources().getString(R.string.chearch_access_text), "доступны"));
-                    break;
-                case "Орденец":
-                    ordenTextView.setText(cursor.getString(2).equals("0") ?
-                            String.format(getResources().getString(R.string.orden_access_text), "недоступны") :
-                            String.format(getResources().getString(R.string.orden_access_text), "доступны"));
-                    break;
+            String s = cursor.getString(1);
+            if ("Страж".equals(s)) {
+                guardAccessTextView.setText(String.format(getResources().getString(R.string.guard_access_text), cursor.getString(2).equals("0") ? "недоступны" : "доступны"));
+
+            } else if ("Монах".equals(s)) {
+                chearchAccessTextView.setText(String.format(getResources().getString(R.string.chearch_access_text), cursor.getString(2).equals("0") ? "недоступны" : "доступны"));
+
+            } else if ("Орденец".equals(s)) {
+                ordenTextView.setText(String.format(getResources().getString(R.string.orden_access_text), cursor.getString(2).equals("0") ? "недоступны" : "доступны"));
+
             }
             cursor.moveToNext();
         }

@@ -42,7 +42,7 @@ public class ListOfStudiedActivity extends AppCompatActivity {
 
     private List<MagicItem> getItems() {
         List<MagicItem> items = new ArrayList<>();
-        String querry = "select * from magic_items where magic_items.is_read = 1";
+        String querry = "SELECT * FROM magic_items WHERE magic_items.is_read = 1";
         Cursor cursor = database.rawQuery(querry, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
@@ -51,6 +51,7 @@ public class ListOfStudiedActivity extends AppCompatActivity {
             item.setTitle(cursor.getString(1));
             item.setDescription(cursor.getString(2));
             items.add(item);
+            cursor.moveToNext();
         }
         cursor.close();
         return items;
@@ -58,13 +59,11 @@ public class ListOfStudiedActivity extends AppCompatActivity {
 
     private void initDB() {
         dataBaseHelper = new DataBaseHelper(this);
-
         try {
             dataBaseHelper.updateDataBase();
         } catch (IOException e) {
             throw new Error("UnableToUpdateDatabase");
         }
-
         database = dataBaseHelper.getWritableDatabase();
     }
 

@@ -35,8 +35,7 @@
             android:layout_below="@id/separator"
             android:layout_margin="8dp"
             android:ellipsize="end"
-            android:maxLines="3"
-            android:text="Описание вещи" />
+            android:maxLines="3" />
 
     </RelativeLayout>
 

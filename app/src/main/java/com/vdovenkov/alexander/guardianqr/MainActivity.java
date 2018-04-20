@@ -32,11 +32,32 @@ public class MainActivity extends AppCompatActivity {
     private static final int ZXING_CAMERA_PERMISSION = 1;
     private Class<?> mClss;
 
+    private Button magicScanButton;
+    private Button showListButton;
+
     @Override
     public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
         setupToolbar();
+
+        magicScanButton = findViewById(R.id.magic_scan_button);
+        magicScanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Запуск сканера магических отпечатков", Toast.LENGTH_SHORT).show();
+                launchActivity(SimpleScannerActivity.class);
+            }
+        });
+
+        showListButton = findViewById(R.id.list_view_button);
+        showListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Открытие списка изученных предметов", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this, ListOfStudiedActivity.class));
+            }
+        });
     }
 
     @Override
@@ -57,11 +78,6 @@ public class MainActivity extends AppCompatActivity {
     public void setupToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-    }
-
-    public void launchSimpleActivity(View v) {
-        Toast.makeText(this, "Запуск сканера магических отпечатков", Toast.LENGTH_SHORT).show();
-        launchActivity(SimpleScannerActivity.class);
     }
 
     public void launchActivity(Class<?> clss) {

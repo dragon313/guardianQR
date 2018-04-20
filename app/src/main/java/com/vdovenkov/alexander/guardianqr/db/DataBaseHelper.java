@@ -21,7 +21,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "guardDB.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 1;
 
     private SQLiteDatabase database;
     private final Context context;
