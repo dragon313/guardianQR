@@ -1,39 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
+    <Button
+        android:id="@+id/magic_scan_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        android:text="@string/investigate" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout
+    <Button
+        android:id="@+id/list_view_button"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/magic_scan_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/investigate" />
-
-        <Button
-            android:id="@+id/list_view_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/show_notepad" />
-    </LinearLayout>
-
+        android:layout_height="wrap_content"
+        android:text="@string/show_notepad" />
 </LinearLayout>

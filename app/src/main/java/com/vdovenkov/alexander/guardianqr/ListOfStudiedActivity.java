@@ -3,10 +3,13 @@ package com.vdovenkov.alexander.guardianqr;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +36,7 @@ public class ListOfStudiedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_studied);
         initDB();
-        adapter = new MagicItemAdapter(getItems());
+        adapter = new MagicItemAdapter(getItems(), this);
         recyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -50,7 +53,9 @@ public class ListOfStudiedActivity extends AppCompatActivity {
             item.setId(cursor.getInt(0));
             item.setTitle(cursor.getString(1));
             item.setDescription(cursor.getString(2));
-            items.add(item);
+            if (dataBaseHelper.checkRules(item.getId(), this)) {
+                items.add(item);
+            }
             cursor.moveToNext();
         }
         cursor.close();
@@ -69,13 +74,14 @@ public class ListOfStudiedActivity extends AppCompatActivity {
 
     private class MagicItemAdapter extends RecyclerView.Adapter<MagicItemsViewHolder> {
         private List<MagicItem> items;
+        private Context context;
 
-        public MagicItemAdapter( List<MagicItem> items) {
+        public MagicItemAdapter(List<MagicItem> items, Context context) {
             this.items = items;
+            this.context = context;
         }
 
         @Override
-
         public MagicItemsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View root = LayoutInflater.from(parent.getContext()).inflate(R.layout.magic_item_view, parent, false);
             return new MagicItemsViewHolder(root);
@@ -83,8 +89,15 @@ public class ListOfStudiedActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(MagicItemsViewHolder holder, int position) {
-            holder.title.setText(items.get(holder.getAdapterPosition()).getTitle());
-            holder.description.setText(items.get(holder.getAdapterPosition()).getDescription());
+            final MagicItem item = items.get(holder.getAdapterPosition());
+            holder.title.setText(item.getTitle());
+            holder.description.setText(item.getDescription());
+            holder.itemCardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ScanDetailActivity.showScanResult(context, String.valueOf(item.getId()));
+                }
+            });
         }
 
         @Override
@@ -100,10 +113,12 @@ public class ListOfStudiedActivity extends AppCompatActivity {
     private static class MagicItemsViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextView description;
+        CardView itemCardView;
         public MagicItemsViewHolder(View itemView) {
             super(itemView);
             title = itemView.findViewById(R.id.magic_item_title_text_view);
             description = itemView.findViewById(R.id.magic_item_description_text_view);
+            itemCardView = itemView.findViewById(R.id.item_card_view);
         }
     }
 }

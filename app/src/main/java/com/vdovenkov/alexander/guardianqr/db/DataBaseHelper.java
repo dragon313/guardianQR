@@ -2,10 +2,13 @@ package com.vdovenkov.alexander.guardianqr.db;
 
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.vdovenkov.alexander.guardianqr.R;
 
@@ -21,7 +24,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "guardDB.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     private SQLiteDatabase database;
     private final Context context;
@@ -50,6 +53,22 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             copyDataBase();
             needUpdate = false;
         }
+    }
+
+    public boolean checkRules(int id, Context context) {
+        String groupQuerry = "SELECT magic_items.group_id FROM magic_items WHERE magic_items._id=?";
+        openDataBase();
+        Cursor groupCursor = database.rawQuery(groupQuerry, new String[]{String.valueOf(id)});
+        groupCursor.moveToFirst();
+        String groupId = groupCursor.getString(0);
+        Log.d(TAG, "Данный предмет относится к группе: " + groupId);
+
+        String querry = "SELECT * FROM access_rules WHERE access_rules._id = (SELECT magic_items.group_id FROM magic_items WHERE magic_items._id=?)";
+        Cursor cursor = database.rawQuery(querry, new String[]{String.valueOf(id)});
+        cursor.moveToFirst();
+        boolean result = cursor.getString(2).equals("1");
+        cursor.close();
+        return result;
     }
 
     private boolean checkDataBase() {
@@ -97,7 +116,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
 
     }
 

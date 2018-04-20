@@ -23,10 +23,15 @@
         </activity>
         <activity
             android:name=".SimpleScannerActivity"
-            android:theme="@style/AppOverlayTheme" />
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme" />
         <activity android:name=".ScanDetailActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".ListOfStudiedActivity"></activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ListOfStudiedActivity"
+            android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

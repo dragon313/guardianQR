@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle state) {
         super.onCreate(state);
         setContentView(R.layout.activity_main);
-        setupToolbar();
+//        setupToolbar();
 
         magicScanButton = findViewById(R.id.magic_scan_button);
         magicScanButton.setOnClickListener(new View.OnClickListener() {
@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setupToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-    }
+//    public void setupToolbar() {
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//    }
 
     public void launchActivity(Class<?> clss) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)

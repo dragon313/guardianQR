@@ -43,7 +43,7 @@ public class ScanDetailActivity extends AppCompatActivity {
     }
 
     private void fetchInfo() {
-        if (checkRules()) {
+        if (dataBaseHelper.checkRules(Integer.parseInt(itemId), this)) {
             String querry = "SELECT * FROM magic_items WHERE _id = ?";
             String isReadQuery = "UPDATE magic_items SET is_read = 1 WHERE _id = ?";
             database.execSQL(isReadQuery, new Object[]{itemId});
@@ -52,29 +52,14 @@ public class ScanDetailActivity extends AppCompatActivity {
             titleTextView.setText(cursor.getString(1));
             descriptionTextView.setText(cursor.getString(2));
             cursor.close();
-        }
-    }
-
-    private boolean checkRules() {
-        String groupQuerry = "SELECT magic_items.group_id FROM magic_items WHERE magic_items._id=?";
-        Cursor groupCursor = database.rawQuery(groupQuerry, null);
-        groupCursor.moveToFirst();
-        String groupId = groupCursor.getString(0);
-        Log.d(TAG, "Данный предмет относится к группе: " + groupId);
-
-        String querry = "SELECT * FROM access_rules WHERE access_rules._id = (SELECT magic_items.group_id FROM magic_items WHERE magic_items._id=?)";
-        Cursor cursor = database.rawQuery(querry, new String[]{itemId});
-        cursor.moveToFirst();
-        boolean result = cursor.getString(0).equals("1");
-        if (!result) {
-            Toast.makeText(this, "Ты не знаешь, что это. Скорее всего в этом разберётся " + cursor.getString(1), Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Ты не знаешь, что это", Toast.LENGTH_SHORT).show();
             finish();
         }
-        cursor.close();
-        return result;
     }
 
     private void initGUI() {
+
         titleTextView = findViewById(R.id.scan_title_text_view);
         descriptionTextView = findViewById(R.id.scan_description_text_view);
     }
