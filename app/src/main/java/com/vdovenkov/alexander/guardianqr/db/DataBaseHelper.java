@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.vdovenkov.alexander.guardianqr.R;
 
@@ -21,13 +20,11 @@ import java.io.OutputStream;
 
 public class DataBaseHelper extends SQLiteOpenHelper {
     public static final String TAG = "DataBaseHelper";
-
+    private static final int DB_VERSION = 9; // TODO: 027 27.05.18 Не забывать инкрементить!!!
     private static String DB_NAME = "guardDB.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 9; // TODO: 027 27.05.18 Не забывать инкрементить!!!
-
-    private SQLiteDatabase database;
     private final Context context;
+    private SQLiteDatabase database;
     private boolean needUpdate = false;
 
     public DataBaseHelper(Context context) {
@@ -69,6 +66,15 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         boolean result = cursor.getString(2).equals("1");
         cursor.close();
         return result;
+    }
+
+    public String getAlterDescription(String id) {
+        String querry = "SELECT alter_description FROM magic_items where _id=?";
+        Cursor cursor = database.rawQuery(querry, new String[]{id});
+        cursor.moveToFirst();
+        String alterDescription = cursor.getString(7);
+        cursor.close();
+        return alterDescription;
     }
 
     private boolean checkDataBase() {

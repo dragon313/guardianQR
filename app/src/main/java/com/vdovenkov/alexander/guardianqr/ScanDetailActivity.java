@@ -36,10 +36,11 @@ public class ScanDetailActivity extends AppCompatActivity {
             context.startActivity(intent);
         } else {
             String querry = "SELECT alter_description FROM magic_items where _id=?";
-            Cursor cursor = database.rawQuery(querry, new String[]{id});
+            Cursor cursor = dataBaseHelper.getReadableDatabase().rawQuery(querry, new String[]{id});
             cursor.moveToFirst();
-            Toast.makeText(context, cursor.getString(7), Toast.LENGTH_SHORT).show();
+            String alterDescription = cursor.getString(0);
             cursor.close();
+            Toast.makeText(context, alterDescription, Toast.LENGTH_SHORT).show();
         }
     }
 
