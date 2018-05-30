@@ -3,13 +3,11 @@ package com.vdovenkov.alexander.guardianqr;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +18,7 @@ import com.vdovenkov.alexander.guardianqr.model.MagicItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ListOfStudiedActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -53,6 +49,8 @@ public class ListOfStudiedActivity extends AppCompatActivity {
             item.setId(cursor.getInt(0));
             item.setTitle(cursor.getString(1));
             item.setDescription(cursor.getString(2));
+            item.setShortDescription(cursor.getString(5));
+            item.setReadDate(cursor.getString(6));
             if (dataBaseHelper.checkRules(item.getId(), this)) {
                 items.add(item);
             }
@@ -70,6 +68,23 @@ public class ListOfStudiedActivity extends AppCompatActivity {
             throw new Error("UnableToUpdateDatabase");
         }
         database = dataBaseHelper.getWritableDatabase();
+    }
+
+    private static class MagicItemsViewHolder extends RecyclerView.ViewHolder {
+        TextView title;
+        TextView description;
+        TextView shortDescription;
+        TextView dateTextView;
+        CardView itemCardView;
+
+        public MagicItemsViewHolder(View itemView) {
+            super(itemView);
+            title = itemView.findViewById(R.id.magic_item_title_text_view);
+            description = itemView.findViewById(R.id.magic_item_description_text_view);
+            shortDescription = itemView.findViewById(R.id.magic_item_short_description);
+            dateTextView = itemView.findViewById(R.id.magic_item_read_date);
+            itemCardView = itemView.findViewById(R.id.item_card_view);
+        }
     }
 
     private class MagicItemAdapter extends RecyclerView.Adapter<MagicItemsViewHolder> {
@@ -92,6 +107,8 @@ public class ListOfStudiedActivity extends AppCompatActivity {
             final MagicItem item = items.get(holder.getAdapterPosition());
             holder.title.setText(item.getTitle());
             holder.description.setText(item.getDescription());
+            holder.shortDescription.setText(item.getShortDescription());
+            holder.dateTextView.setText(item.getReadDate());
             holder.itemCardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -106,19 +123,6 @@ public class ListOfStudiedActivity extends AppCompatActivity {
                 return items.size();
             }
             return 0;
-        }
-    }
-
-
-    private static class MagicItemsViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
-        TextView description;
-        CardView itemCardView;
-        public MagicItemsViewHolder(View itemView) {
-            super(itemView);
-            title = itemView.findViewById(R.id.magic_item_title_text_view);
-            description = itemView.findViewById(R.id.magic_item_description_text_view);
-            itemCardView = itemView.findViewById(R.id.item_card_view);
         }
     }
 }

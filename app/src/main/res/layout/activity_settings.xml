@@ -28,7 +28,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:hint="@string/magic_word"
-            android:inputType="numberDecimal"
+            android:inputType="numberPassword"
             android:maxLines="1" />
     </android.support.design.widget.TextInputLayout>
 
@@ -79,4 +79,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chearch_access_text_view" />
+
+    <TextView
+        android:id="@+id/medic_access_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/medic_access_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/orden_access_text_view" />
+
+    <TextView
+        android:id="@+id/city_guardian_access_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/city_guardian_access_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/medic_access_text_view" />
+
+    <TextView
+        android:id="@+id/geniy_access_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/geniy_access_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/city_guardian_access_text_view" />
+
+    <TextView
+        android:id="@+id/scientist_access_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/scientist_access_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/geniy_access_text_view" />
 </android.support.constraint.ConstraintLayout>

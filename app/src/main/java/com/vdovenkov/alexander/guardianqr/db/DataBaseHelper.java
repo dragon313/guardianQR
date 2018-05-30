@@ -24,7 +24,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     private static String DB_NAME = "guardDB.db";
     private static String DB_PATH = "";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 9; // TODO: 027 27.05.18 Не забывать инкрементить!!!
 
     private SQLiteDatabase database;
     private final Context context;
@@ -97,6 +97,7 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         while ((length = inputStream.read(buffer)) > 0) {
             outputStream.write(buffer, 0, length);
         }
+        Log.d(TAG, "Идёт копирование ДБ");
         outputStream.flush();
         outputStream.close();
         inputStream.close();

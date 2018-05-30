@@ -8,6 +8,10 @@
     <string name="guard_access_text">Знания стража: %1$s</string>
     <string name="chearch_access_text">Знания монаха: %1$s</string>
     <string name="orden_access_text">Знания орденца: %1$s</string>
+    <string name="medic_access_text">Знания медика: %1$s</string>
+    <string name="city_guardian_access_text">Знания городского стража: %1$s</string>
+    <string name="geniy_access_text">Знания одаренного: %1$s</string>
+    <string name="scientist_access_text">Знания ученого: %1$s</string>
     <string name="cast">Кастануть</string>
 
     <string name="scanner_activity">ZXing Scanner - Full Activity</string>
